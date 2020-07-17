@@ -15,9 +15,9 @@ before_build:
 - cmd: >-
     cd %APPVEYOR_BUILD_FOLDER%
 
-   
+    cd ImageEditor
 
-    cmake ImageEditor
+    qmake ImageEditor.pro
 build:
   project: C:\QtProjects\ImageEditor\ImageEditor2.0\ImageEditor
   parallel: true
