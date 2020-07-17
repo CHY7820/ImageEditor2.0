@@ -1,0 +1,42 @@
+version: 0.1.0.{build}
+image: Visual Studio 2017
+configuration: Release
+platform: Any CPU
+clone_depth: 1
+clone_folder: C:\QtProjects\ImageEditor\ImageEditor2.0
+init:
+- cmd: ''
+environment:
+  OpenCV: C:\QtProjects\ImageEditor\ImageEditor2.0
+  QTDIR: C:\QT\5.12.9\mingw73_64
+  #CMD_VCVARSALL: "'\"D:\\VisualStudio\\VC\\Auxiliary\\Build\\vcvarsall.bat\" x64'"
+  #MSVC_PLATFORM: x64
+before_build:
+- cmd: >-
+    - cd %APPVEYOR_BUILD_FOLDER%
+
+    - cd ImageEditor
+
+    - qmake ImageEditor.pro
+build:
+  project: C:\QtProjects\ImageEditor\ImageEditor2.0\ImageEditor
+  parallel: true
+  verbosity: minimal
+before_package:
+- cmd: ''
+after_build:
+- cmd: >-
+    - cd %APPVEYOR_BUILD_FOLDER%
+      - cd ImageEditor\
+      - mkdir ReleaseV
+      - xcopy %APPVEYOR_BUILD_FOLDER%\release\release\ImageEditor.exe %APPVEYOR_BUILD_FOLDER%\ImageEditor\ReleaseV\
+      - cd ReleaseV\
+      - windeployqt ImageEditor.exe
+deploy:
+- provider: GitHub
+  description: 0.0
+  #auth_token:
+  #  secure: m1cMyBrbh5RcWb5A8kS1FqQOoxJc4TcB5KU7KZuVIKIq8ejjTjru6Q6Fg+RBAUvd
+  repository: CHY7820/ImageEditor2.0
+  draft: false
+  force_update: false
