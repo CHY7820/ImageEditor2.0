@@ -13,11 +13,11 @@ environment:
   #MSVC_PLATFORM: x64
 before_build:
 - cmd: >-
-    - cd %APPVEYOR_BUILD_FOLDER%
+    cd %APPVEYOR_BUILD_FOLDER%
 
-    - cd ImageEditor
+    cd ImageEditor
 
-    - qmake ImageEditor.pro
+    qmake ImageEditor.pro
 build:
   project: C:\QtProjects\ImageEditor\ImageEditor2.0\ImageEditor
   parallel: true
@@ -26,12 +26,12 @@ before_package:
 - cmd: ''
 after_build:
 - cmd: >-
-    - cd %APPVEYOR_BUILD_FOLDER%
-      - cd ImageEditor\
-      - mkdir ReleaseV
-      - xcopy %APPVEYOR_BUILD_FOLDER%\release\release\ImageEditor.exe %APPVEYOR_BUILD_FOLDER%\ImageEditor\ReleaseV\
-      - cd ReleaseV\
-      - windeployqt ImageEditor.exe
+     cd %APPVEYOR_BUILD_FOLDER%
+     cd ImageEditor\
+     mkdir ReleaseV
+     xcopy %APPVEYOR_BUILD_FOLDER%\release\release\ImageEditor.exe %APPVEYOR_BUILD_FOLDER%\ImageEditor\ReleaseV\
+     cd ReleaseV\
+     windeployqt ImageEditor.exe
 deploy:
 - provider: GitHub
   description: 0.0
