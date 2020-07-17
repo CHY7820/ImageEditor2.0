@@ -15,7 +15,7 @@ before_build:
 - cmd: >-
     cd %APPVEYOR_BUILD_FOLDER%
 
-    cd ImageEditor
+   
 
     cmake ImageEditor.pro
 build:
