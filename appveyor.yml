@@ -17,7 +17,7 @@ before_build:
 
     cd ImageEditor
 
-    qmake ImageEditor.pro
+    cmake ImageEditor.pro
 build:
   project: C:\QtProjects\ImageEditor\ImageEditor2.0\ImageEditor
   parallel: true
